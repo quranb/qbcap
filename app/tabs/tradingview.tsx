@@ -1,25 +1,13 @@
-"use client"
-import { useEffect } from "react"
+// Tile-based layout for TradingView charts tab
+import React from "react";
 
-export default function TradingViewChart() {
-  useEffect(() => {
-    const script = document.createElement("script")
-    script.src = "https://s3.tradingview.com/tv.js"
-    script.async = true
-    script.onload = () => {
-      new window.TradingView.widget({
-        container_id: "tradingview",
-        autosize: true,
-        symbol: "NASDAQ:AAPL",
-        interval: "D",
-        timezone: "Etc/UTC",
-        theme: "dark",
-        style: "1",
-        locale: "en"
-      })
-    }
-    document.body.appendChild(script)
-  }, [])
-
-  return <div id="tradingview" className="h-[500px] w-full rounded-xl" />
+export default function tradingview() {
+  return (
+    <div className="p-6 grid grid-cols-2 gap-4">
+      <div className="bg-white rounded-2xl shadow-xl p-4 hover:scale-105 transition">Tile 1</div>
+      <div className="bg-white rounded-2xl shadow-xl p-4 hover:scale-105 transition">Tile 2</div>
+      <div className="bg-white rounded-2xl shadow-xl p-4 hover:scale-105 transition">Tile 3</div>
+      <div className="bg-white rounded-2xl shadow-xl p-4 hover:scale-105 transition">Tile 4</div>
+    </div>
+  );
 }
