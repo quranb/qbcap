@@ -1,41 +1,38 @@
 
-// QBCapital Overview Page (Styled)
-// File: overview.tsx
-import React from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { Card, CardContent } from '@/components/ui/card';
-import { ArrowRight, BarChart3, Bot, Brain, Radar, Activity } from 'lucide-react';
+'use client'
+import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
 
-const tileData = [
-  { title: 'Markets', icon: BarChart3, href: '/tabs/markets', color: 'bg-gradient-to-r from-blue-500 to-purple-600' },
-  { title: 'AI Hub', icon: Brain, href: '/tabs/ai-coach', color: 'bg-gradient-to-r from-emerald-400 to-cyan-500' },
-  { title: 'TradingView', icon: Radar, href: '/tabs/tradingview', color: 'bg-gradient-to-r from-yellow-400 to-orange-500' },
-  { title: 'ETF Screener', icon: BarChart3, href: '/tabs/etf-screener', color: 'bg-gradient-to-r from-pink-500 to-red-600' },
-  { title: 'Airdrops', icon: Activity, href: '/tabs/airdrops', color: 'bg-gradient-to-r from-teal-500 to-indigo-600' },
-  { title: 'Risk Strategy', icon: Bot, href: '/tabs/risk-ai-strategy', color: 'bg-gradient-to-r from-lime-400 to-green-600' },
-];
+const tiles = [
+  { title: "Markets", href: "/tabs/markets", icon: "📊" },
+  { title: "AI Hub", href: "/tabs/ai-coach", icon: "🧠" },
+  { title: "TradingView", href: "/tabs/tradingview", icon: "📈" },
+  { title: "ETF Screener", href: "/tabs/etf-screener", icon: "🧾" },
+  { title: "Airdrops", href: "/tabs/airdrops", icon: "🪂" },
+  { title: "Risk Strategy", href: "/tabs/risk-ai-strategy", icon: "⚠️" },
+  { title: "Gmail Digest", href: "/tabs/gmail-email", icon: "📥" },
+]
 
 export default function Overview() {
+  const router = useRouter()
+
   return (
-    <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {tileData.map(({ title, icon: Icon, href, color }) => (
-        <Link key={title} href={href}>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black p-6 text-white">
+      <h1 className="text-4xl font-bold mb-6">📊 Dashboard Overview</h1>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+        {tiles.map((tile) => (
           <motion.div
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className={`rounded-2xl p-5 text-white shadow-lg ${color} cursor-pointer transition duration-300`}
+            whileTap={{ scale: 0.95 }}
+            key={tile.title}
+            className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-6 cursor-pointer shadow-xl hover:shadow-2xl"
+            onClick={() => router.push(tile.href)}
           >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Icon size={28} />
-                <span className="text-xl font-semibold">{title}</span>
-              </div>
-              <ArrowRight />
-            </div>
+            <div className="text-4xl mb-3">{tile.icon}</div>
+            <div className="text-xl font-semibold">{tile.title}</div>
           </motion.div>
-        </Link>
-      ))}
+        ))}
+      </div>
     </div>
-  );
+  )
 }
